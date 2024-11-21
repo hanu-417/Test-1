@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+int checkSubstring(char mainStr[], char subStr[]) {
+    int i, j;
+    int mainLen = 0, subLen = 0;
+    
+    // Calculate the lengths of both strings
+    while (mainStr[mainLen] != '\0') {
+        mainLen++;
+    }
+    while (subStr[subLen] != '\0') {
+        subLen++;
+    }
+
+    // Check if the substring is longer than the main string
+    if (subLen > mainLen) {
+        return 0;  // Substring cannot be found if it's longer than the main string
+    }
+
+    // Loop through the main string
+    for (i = 0; i <= mainLen - subLen; i++) {
+        // Compare the substring with the current part of the main string
+        for (j = 0; j < subLen; j++) {
+            if (mainStr[i + j] != subStr[j]) {
+                break;  // If characters don't match, break the inner loop
+            }
+        }
+
+        // If the entire substring matches, return 1 (true)
+        if (j == subLen) {
+            return 1;
+        }
+    }
+
+    return 0;  // Substring not found
+}
+
+int main() {
+    char mainStr[100], subStr[50];
+
+    // Input the main string and the substring
+    printf("Enter the main string: ");
+    fgets(mainStr, sizeof(mainStr), stdin);
+    mainStr[strcspn(mainStr, "\n")] = '\0';  // Remove newline character
+
+    printf("Enter the substring: ");
+    fgets(subStr, sizeof(subStr), stdin);
+    subStr[strcspn(subStr, "\n")] = '\0';  // Remove newline character
+
+    // Check if the substring exists within the main string
+    if (checkSubstring(mainStr, subStr)) {
+        printf("Substring '%s' found in the main string.\n", subStr);
+    } else {
+        printf("Substring '%s' not found in the main string.\n", subStr);
+    }
+
+    return 0;
+}
