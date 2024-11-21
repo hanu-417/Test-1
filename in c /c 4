@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <ctype.h>  // For using the tolower() function
+
+int main() {
+    char str[100];
+    int vowels = 0, consonants = 0;
+    
+    // Prompt user for input
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);  // Using fgets to allow spaces in the input
+    
+    // Loop through each character of the string
+    for (int i = 0; str[i] != '\0'; i++) {
+        char ch = tolower(str[i]);  // Convert character to lowercase for easy comparison
+        
+        // Check if the character is a letter
+        if (ch >= 'a' && ch <= 'z') {
+            // Check if the character is a vowel
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                vowels++;
+            }
+            // If not a vowel, it must be a consonant
+            else {
+                consonants++;
+            }
+        }
+    }
+
+    // Display the results
+    printf("Vowels: %d\n", vowels);
+    printf("Consonants: %d\n", consonants);
+
+    return 0;
+}
