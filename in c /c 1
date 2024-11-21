@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int stringLength(char str[]) {
+    int length = 0;
+    
+    // Iterate through each character until the null terminator
+    while (str[length] != '\0') {
+        length++;
+    }
+    
+    return length;
+}
+
+int main() {
+    char str[100];
+    
+    // Input the string from the user
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+    
+    // Remove the newline character added by fgets if present
+    str[strcspn(str, "\n")] = '\0';
+    
+    // Call the stringLength function to find the length
+    int length = stringLength(str);
+    
+    printf("Length of the string is: %d\n", length);
+    
+    return 0;
+}
